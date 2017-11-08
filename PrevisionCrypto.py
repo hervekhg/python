@@ -172,6 +172,8 @@ if __name__ == '__main__':
     It Tell you when you buy and when you sell
 
     If your are interested Send me an email at : herve.esir@gmail.com
+    If you want to support and encourage us below our Eth Adress : 
+    0x57560034783572bFc8516Eee629588e28f55987c
     """
 
     print "Currency Prevision of : " , datetime.now()
