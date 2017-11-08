@@ -13,6 +13,7 @@ from json import load
 import unicodedata
 from sys import argv
 from colored import fore, back, style
+from datetime import datetime
 
 # unicodedata.normalize('NFKD', title).encode('ascii','ignore')
 
@@ -39,14 +40,14 @@ Cryptodict = dict()
 # Seuil Achat Vente 7 Jour
 SV_7D = 15
 SA_7D = -20
-SV_7D_R = 20  # Risque
-SA_7D_R = -15 # Risque 
+SV_7D_R = 12  # Risque
+SA_7D_R = -10 # Risque 
 
 # Seuil Achat Vente 24h
 SV_24H = -3
 SA_24H = 3
-SV_24H_R = -2 # Risque
-SA_24H_R = 2 # Risque
+SV_24H_R = -1 # Risque
+SA_24H_R = 1 # Risque
 
 # Seuil Achat Vente 1h
 SV_1H = -0.5
@@ -172,6 +173,9 @@ if __name__ == '__main__':
 
     If your are interested Send me an email at : herve.esir@gmail.com
     """
+
+    print "Currency Prevision of : " , datetime.now()
+
     DataJson = AllCrypto.getDataJson()
     if int(LEVEL) == 0:
         print "Prévision With No Risk - LEVEL:%s" %LEVEL
