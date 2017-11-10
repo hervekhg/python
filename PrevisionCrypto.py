@@ -39,19 +39,28 @@ Cryptodict = dict()
 
 # Seuil Achat Vente 7 Jour
 SV_7D = 15
-SA_7D = -20
-SV_7D_R = 12  # Risque
-SA_7D_R = -10 # Risque 
+SA_7D = -15
+SV_7D_N = 10
+SA_7D_N = -10
+SV_7D_R = 7  # Risque
+SA_7D_R = -7 # Risque 
 
 # Seuil Achat Vente 24h
-SV_24H = -3
-SA_24H = 3
-SV_24H_R = -1 # Risque
-SA_24H_R = 1 # Risque
+SV_24H = -6
+SA_24H = 6
+SV_24H_N = -3
+SA_24H_N = 3
+SV_24H_R = -2 # Risque
+SA_24H_R = 2 # Risque
 
 # Seuil Achat Vente 1h
-SV_1H = -0.5
-SA_1H = 0.5
+SV_1H = -7
+SA_1H = 7
+SV_1H_N = -3
+SA_1H_N = 3
+SV_1H_R = -2
+SA_1H_R = 2
+
 
 
 class JsonMarket(object):
@@ -85,11 +94,11 @@ class JsonMarket(object):
             Cryptodict[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
 
             ##### Algorithme de détermination d'achat/vente #####
-            if (float(percent_change_7d) < SA_7D and float(percent_change_24h) > SA_24H):
+            if (float(percent_change_7d) < SA_7D_N and float(percent_change_24h) > SA_24H_N and float(percent_change_1h) > SA_1H_N):
                 # print "Buy"
                 # print name, Cryptodict[name]
                 self.CryptodictBuy[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
-            elif (float(percent_change_7d) > SV_7D and float(percent_change_24h) < SV_24H):
+            elif (float(percent_change_7d) > SV_7D and float(percent_change_24h) < SV_24H and float(percent_change_1h) > SA_1H_N):
                 # print "Sell"
                 # print name, Cryptodict[name]
                 self.CryptodictSell[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
@@ -114,11 +123,11 @@ class JsonMarket(object):
             Cryptodict[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
 
             ##### Algorithme de détermination d'achat/vente #####
-            if (float(percent_change_7d) < SA_7D_R and float(percent_change_24h) > SA_24H_R):
+            if (float(percent_change_7d) < SA_7D_R and float(percent_change_24h) > SA_24H_R and float(percent_change_1h) > SA_1H_R):
                 # print "Buy"
                 # print name, Cryptodict[name]
                 self.CryptodictBuy[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
-            elif (float(percent_change_7d) > SV_7D_R and float(percent_change_24h) > SV_24H_R):
+            elif (float(percent_change_7d) > SV_7D_R and float(percent_change_24h) > SV_24H_R and float(percent_change_1h) > SV_1H_R):
                 # print "Sell"
                 # print name, Cryptodict[name]
                 self.CryptodictSell[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
