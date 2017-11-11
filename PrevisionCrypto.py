@@ -61,7 +61,8 @@ SA_1H_N = 3
 SV_1H_R = -2
 SA_1H_R = 2
 
-
+# Seuil one Shot
+S_1H_O = 3
 
 class JsonMarket(object):
     """docstring for JsonMarket"""
@@ -94,11 +95,11 @@ class JsonMarket(object):
             Cryptodict[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
 
             ##### Algorithme de détermination d'achat/vente #####
-            if (float(percent_change_7d) < SA_7D_N and float(percent_change_24h) > SA_24H_N and float(percent_change_1h) > SA_1H_N):
+            if ((float(percent_change_7d) < SA_7D_N and float(percent_change_24h) > SA_24H_N and float(percent_change_1h) > SA_1H_N) or float(percent_change_1h) > S_1H_O):
                 # print "Buy"
                 # print name, Cryptodict[name]
                 self.CryptodictBuy[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
-            elif (float(percent_change_7d) > SV_7D and float(percent_change_24h) < SV_24H and float(percent_change_1h) > SA_1H_N):
+            elif ((float(percent_change_7d) > SV_7D_N and float(percent_change_24h) < SV_24H_N and float(percent_change_1h) > SA_1H_N) or float(percent_change_1h) < -(S_1H_O)):
                 # print "Sell"
                 # print name, Cryptodict[name]
                 self.CryptodictSell[name] = [symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d, volume_24h]
